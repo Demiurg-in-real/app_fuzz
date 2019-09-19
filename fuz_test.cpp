@@ -7,15 +7,17 @@ class run{
 	pid_t forpid;
 	pid_t parpid;
 public:
-	int get();
+	void get();
 }__attribute__((packed));
-int run::get(){
+void run::get(){
 
 	switch(vfork()){
 		case 0:
+		cout<<getpid();
 		execve("b.out", NULL, NULL);
 		default:
-		return 0;
+		cout << "again";
+//		return 0;
 	}
 }
 int main(){
