@@ -1,0 +1,3 @@
+nasm -felf64 testasm.asm
+ld -o testasm testasm.o
+nasm -f bin -o floppy.img marka.nasm

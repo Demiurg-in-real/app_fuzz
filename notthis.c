@@ -1,11 +1,11 @@
 #include<stdio.h>
+#include<unistd.h>
+#include<stdbool.h>
 int main()
 {
-	FILE *p=fopen("text.txt", "rt");
-	if(p == NULL){
-		//perror("fopen");
-		//return -1;
-	}
-	fclose(p);
+	//while(true){
+	//	pause();
+	//}
+	int a=34/0;
 	return 0;
 }

@@ -11,7 +11,8 @@ class run{
 	pid_t forpid;
 	pid_t parpid;
 	int wstatus;
-	char *erro;
+	char erro[80];
+	char *check;
 public:
 	void get();
 }__attribute__((packed));
@@ -22,10 +23,14 @@ void run::get(){
 		execve("b.out", NULL, NULL);
 	}
 	else {
+		cout << parpid << "\n";
 		waitpid(parpid,&wstatus, WUNTRACED);
 		if (WIFSIGNALED(wstatus)){
-			erro=strerror(WTERMSIG(wstatus));
-			cout << "Sie error   "<< erro;
+
+			//check=strerror_r(WTERMSIG(wstatus), erro, 79);// == -1) perror("strerror_r");
+			cout << "Sie error   "<< strerror(WTERMSIG(wstatus)) << "\n";
+			cout <<  stderr <<"\n";
+			//for (int i=0; i<80; i++) printf("%i\n", erro[i]);
 		}
 	}
 }
