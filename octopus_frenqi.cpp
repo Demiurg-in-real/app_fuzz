@@ -7,21 +7,22 @@
 #include<cstring>
 #include<pthread.h>
 namespace fuzzing{
-	int y=0;
-	static void *run(void *name){
-		char *s = (char *)name;
+	char iter[2];
+	static void *run(void *name1){
+		char *name=(char *)name1;
+		char *s = (char *)name[0];
 		pid_t parpid;
 		int wstatus;
-		int counter=0;
+//		int counter=0;
 		char hs[2];
 		unsigned char y=0x0;
-		std::cout <<"1\n";
-		while(counter < 256){
+//		std::cout <<"1\n";
+		for (iter[name[2]]=name[1];iter[name[1]]<name[1]+127;iter[name[2]]++){
 			sprintf(hs,"%c\n",y);
-//			printf("%i\n",counter);
+			printf("%i\n",iter[name[2]]);
 			char *argv[2]={s,hs};
 //			for(int i=7; i>=0;i--) printf("%x",(*argv[1]>>i)&0x1);
-			//printf(" - %i\n",y);
+//			printf(" - %i\n",name);
 			parpid=vfork();
 			if(parpid == 0){
 				execve(s, argv, NULL);
@@ -30,11 +31,9 @@ namespace fuzzing{
 				waitpid(parpid,&wstatus, WUNTRACED);
 				if (WIFSIGNALED(wstatus)){
 					//std::cout<<"1";
-//					std::cout << strsignal(WTERMSIG(wstatus)) << "\n";
+					std::cout << strsignal(WTERMSIG(wstatus)) << "\n";
 				}
 			}
-			counter++;
-			y++;
 		}
 		return (void *)parpid;
 	}
@@ -57,10 +56,17 @@ namespace fuzzing{
 		}
 	}
 	void threads::go(){
-		for (int i=0;i<1;i++){	
-			y++;
-			pthread_create(&proc[i],NULL,run,(void *)"c.out");
-			pthread_join(proc[i], &res);
+		unsigned char sen[3];
+		char *he="c.out";
+		(char*)(sen+0)=(char *)"c.out";
+		printf("%s\n",sen[0]);
+		//&sen[0]=(char*)"c.out";
+		for (int i=0;i<1;i++){
+			sen[1]=((char)i) * 128;
+			sen[2]=(char)i;
+			pthread_create(&proc[i],NULL,run,(void *)sen);
+			for(int l=0; l<3;l++) printf("%s --",sen[0]);
+//			pthread_join(proc[i], &res);
 		}
 	};
 }
