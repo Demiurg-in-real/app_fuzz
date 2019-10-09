@@ -18,9 +18,9 @@ namespace fuzzing{
 		std::cout <<"1\n";
 		while(counter < 256){
 			sprintf(hs,"%c\n",y);
-			printf("%i\n",counter);
+//			printf("%i\n",counter);
 			char *argv[2]={s,hs};
-			//for(int i=7; i>=0;i--) printf("%i",(*argv[1]>>i)&0x1);
+//			for(int i=7; i>=0;i--) printf("%x",(*argv[1]>>i)&0x1);
 			//printf(" - %i\n",y);
 			parpid=vfork();
 			if(parpid == 0){
@@ -30,7 +30,7 @@ namespace fuzzing{
 				waitpid(parpid,&wstatus, WUNTRACED);
 				if (WIFSIGNALED(wstatus)){
 					//std::cout<<"1";
-					std::cout << strsignal(WTERMSIG(wstatus)) << "\n";
+//					std::cout << strsignal(WTERMSIG(wstatus)) << "\n";
 				}
 			}
 			counter++;
@@ -52,6 +52,7 @@ namespace fuzzing{
 	}
 	threads::~threads(){
 		for (int i=0;i<2;i++){
+//			std::cout<<i<<"\n";
 			pthread_cancel(proc[i]);
 		}
 	}
@@ -66,6 +67,6 @@ namespace fuzzing{
 
 int main(){
 	fuzzing::threads pthr;
-	//`printf("%c\n",0x48);
+	printf("%c\n",0x48);
 	return 0;
 }
