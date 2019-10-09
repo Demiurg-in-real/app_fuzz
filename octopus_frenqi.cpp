@@ -66,6 +66,9 @@ namespace fuzzing{
 }
 
 int main(){
+	FILE *point;
+	void *point1;
+	point = (FILE *)point1;
 	fuzzing::threads pthr;
 	printf("%c\n",0x48);
 	return 0;
