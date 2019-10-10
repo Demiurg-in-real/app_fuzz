@@ -17,12 +17,7 @@ namespace fuzzing{
 		char hs[2];
 		unsigned char y=0x0;
 //		std::cout <<"1\n";
-		for (iter[name[2]]=name[1];iter[name[1]]<name[1]+127;iter[name[2]]++){
-			sprintf(hs,"%c\n",y);
-			printf("%i\n",iter[name[2]]);
-			char *argv[2]={s,hs};
-//			for(int i=7; i>=0;i--) printf("%x",(*argv[1]>>i)&0x1);
-//			printf(" - %i\n",name);
+		for (){
 			parpid=vfork();
 			if(parpid == 0){
 				execve(s, argv, NULL);
@@ -30,7 +25,6 @@ namespace fuzzing{
 			else {
 				waitpid(parpid,&wstatus, WUNTRACED);
 				if (WIFSIGNALED(wstatus)){
-					//std::cout<<"1";
 					std::cout << strsignal(WTERMSIG(wstatus)) << "\n";
 				}
 			}
