@@ -1,2 +1,0 @@
-void *genetic(void *argc){
-	
